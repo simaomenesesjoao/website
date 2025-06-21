@@ -1,0 +1,149 @@
+<nav class="navbar-style navbar fixed-top ">
+    <!------ bg-body-tertiary ---->
+  <div class="container-fluid ">
+
+    <div>
+
+        <div [ngClass]="{'myclass': previous() !== null, 'myclass_hide': previous() === null}">
+            <a [routerLink]="['/', previous()?.project, previous()?.chapter, previous()?.page]"> 
+                
+                <i class="bi bi-arrow-left text-white" style="font-size: 2rem;"></i>
+            </a> 
+        </div>
+        
+        <div style="display: inline-block; color:black; font-size:1.5rem"> 
+            <h1>{{ current() }} </h1>
+        </div>
+
+        <div [ngClass]="{'myclass': next() !== null, 'myclass_hide': next() === null}">
+            <a [routerLink]="['/', next()?.project, next()?.chapter, next()?.page]" >
+                <i class="bi bi-arrow-right text-white" style="font-size: 2rem;"></i>
+            </a>
+        </div>
+    </div>
+    
+    <button class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="offcanvas" 
+            data-bs-target="#offcanvasNavbar" 
+            aria-controls="offcanvasNavbar" 
+            aria-label="Toggle navigation">
+
+      <span class="navbar-dark navbar-toggler-icon"></span>
+
+    </button>
+
+    <div class="offcanvas offcanvas-end" 
+         tabindex="-1" 
+         id="offcanvasNavbar" 
+         aria-labelledby="offcanvasNavbarLabel">
+
+      <div class="offcanvas-header">
+        <h2 class="offcanvas-title" id="offcanvasNavbarLabel">Navigation</h2>
+        
+        <button type="button" 
+                class="btn-close" 
+                data-bs-dismiss="offcanvas" 
+                aria-label="Close">
+        </button>
+
+      </div>
+
+      <div class="offcanvas-body">
+        
+        <div class="accordion" id="accordionPanelsStayOpenExample">
+
+            
+            <div [routerLink]="'/Home'" class="accordion-item" 
+                style="padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x); cursor:pointer">
+                Home
+            </div>
+
+            <div [routerLink]="'/About'" class="accordion-item" 
+                style="padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x); cursor:pointer">
+                About me
+            </div>
+
+            <div class="accordion-item" id="panelsStayOpen-headingOne">
+
+                    <div style="display: flex">
+
+                        <div [routerLink]="['/Projects']" class="custom-split-button-left">
+                            Projects
+                        </div>
+
+                        <button class="accordion-button collapsed custom-split-button-right" 
+                                type="button" 
+                                data-bs-toggle="collapse" 
+                                data-bs-target="#panelsStayOpen-collapseOne" 
+                                aria-expanded="false" 
+                                aria-controls="panelsStayOpen-collapseOne">
+                        </button>
+                    </div>
+
+                <div id="panelsStayOpen-collapseOne" 
+                     class="accordion-collapse collapse" 
+                     aria-labelledby="panelsStayOpen-headingOne">
+
+                    <div class="accordion-body">
+                        <div class="accordion" id="accordionPanelsStayOpenExample1">
+                            <ul>
+                                @for (project of projects(); track project.project; let i = $index) {
+                                    <li class="accordion-item" id="heading-{{ i }}">
+
+                                            <div style="display: flex">
+
+                                                <div class="custom-split-button-left">
+                                                    <a [routerLink]="['/', project.project, project.chapters[0].chapter, project.chapters[0].page]">
+                                                        {{ project.project }}
+                                                    </a>
+                                                </div>
+
+
+                                                <button class="accordion-button collapsed custom-split-button-right" 
+                                                        type="button"
+                                                        data-bs-toggle="collapse"
+                                                        [attr.data-bs-target]="'#collapse-' + i"
+                                                        [attr.aria-controls]="'collapse-' + i"
+                                                        aria-expanded="false">
+                                                </button>
+                                            </div>
+
+                                        <div id="collapse-{{ i }}" 
+                                            class="accordion-collapse collapse" 
+                                            [attr.aria-labelledby]="'heading-' + i">
+
+                                            <div class="accordion-body"> 
+                                                <ul >
+                                                @for (chapter of project.chapters; track chapter) {
+                                                    <li class="accordion-item" 
+                                                        style="padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x); cursor:pointer">
+                                                        <a [routerLink]="['/', project.project, chapter.chapter, chapter.page]">
+                                                            {{ chapter.page }}
+
+                                                        </a>
+                                                    </li>
+                                                }
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div [routerLink]="'/Contact'" class="accordion-item" 
+                style="padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x); cursor:pointer"
+                >
+                Contact me
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

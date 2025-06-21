@@ -1,0 +1,32 @@
+.myclass {
+  display: inline-block; 
+  padding-right: 1rem; 
+  padding-left: 1rem;
+}
+
+.myclass_hide {
+  display: inline-block; 
+  visibility: hidden;
+  padding-right: 1rem; 
+  padding-left: 1rem;
+}
+
+button {
+  background-color: var(--bg2-color);
+  border-radius: 2px;
+}
+
+
+button:hover {
+  background-color: var(--card-bg);
+}
+
+
+button a {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: var(--accent-color);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.2s;
+}

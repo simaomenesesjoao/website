@@ -1,0 +1,16 @@
+<div #htmlContainer [innerHTML]="htmlContent()"></div>
+<hr>
+
+<div [ngClass]="{'myclass': previous(), 'myclass_hide': !previous()}">
+    <button type="button">
+        
+    <a [routerLink]="['/', previous()?.project, previous()?.chapter, previous()?.page]"> Previous<br>Chapter </a> 
+    </button>
+</div>
+
+<div [ngClass]="{'myclass': next() !== null, 'myclass_hide': next() === null}">
+    
+    <button type="button">
+        <a [routerLink]="['/', next()?.project, next()?.chapter, next()?.page]" > Next<br>Chapter </a>
+    </button>
+</div>
