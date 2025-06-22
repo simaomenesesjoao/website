@@ -6,9 +6,9 @@
 
 :root {
   --bg-color: #ffffff;;
-  --bg3-color: #ffb8031e;
-  --bg2-color: #ffffff;
-  --card-bg: #ffb703;
+  --bg2-color: #f1d7933f;
+  --bg3-color: #ffffff;
+  --card-bg: #ffda96;
   --nav-bg: #023047;
   --text-color: #000000;
   --text-color-muted: #353535;
@@ -87,7 +87,7 @@ h1, h2, h3 {
 
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, 350px);
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
@@ -107,6 +107,8 @@ h1, h2, h3 {
 
 .article-card h3 {
   margin-top: 0;
+
+  text-align: center;
   color: var(--accent-color);
 }
 
@@ -115,21 +117,53 @@ h1, h2, h3 {
   color: var(--text-color-muted);
 }
 
+.article-card img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  border-radius: 16px;
+}
+
+
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: rgba(225, 182, 13, 0.6);
+  color: rgb(0, 0, 0);
+  backdrop-filter: blur(4px);
+  transition: height 0.4s ease;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
 .article-card a {
   margin-top: 1rem;
-  color: var(--accent-color);
+  color: var(--nav-bg);
   font-weight: bold;
   text-decoration: none;
   transition: color 0.2s;
 }
 
 .article-card a:hover {
-  color: #ffaa00;
+  color: var(--nav-bg);
+  text-decoration: underline;
 }
 
 .article-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 24px rgba(255, 102, 0, 0.15);
+}
+
+.article-card:hover .card-overlay {
+  height: 40%;
 }
 
 .centered-figure {
