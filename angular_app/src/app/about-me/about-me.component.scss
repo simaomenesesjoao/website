@@ -1,0 +1,124 @@
+/* Base layout: two columns */
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 100px;
+    row-gap: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.container-rev {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    column-gap: 100px;
+    row-gap: 50px;  
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.column-text {
+    flex: 1 1 500px;
+    min-width: 400px;
+}
+
+.column-text-large {
+    flex: 3 1 200px;
+    min-width: 400px;
+}
+
+.column-photos {
+    flex: 1 1 500px;
+    min-width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}  
+
+.column-photos-small {
+    flex: 1 1 300px;
+    min-width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.photo-wrapper {
+    transition: transform 0.3s ease, z-index 0.3s ease;
+    cursor: pointer;
+}
+
+
+.photo-wrapper2 {
+    transition: transform 0.3s ease, z-index 0.3s ease;
+    cursor: pointer;
+}
+
+.photo-wrapper:hover {
+    transform: rotate(0deg) scale(1.5) translateY(-10px);
+    z-index: 10;
+}
+
+.photo-wrapper2:hover {
+    transform: rotate(0deg) scale(1.2);
+    z-index: 10;
+}
+
+
+.photo1 {
+    transform: scale(1.2) rotate(5deg) translateY(-2px);
+}
+
+.photo2 {
+    transform: scale(1.2) rotate(-4deg) translateY(20px);
+}
+
+.photo3 {
+    transform: scale(1.2) rotate(10deg) translateX(-20px);
+}
+
+.photo4 {
+    transform: scale(1.2) rotate(-7deg) translateX(10px);
+}
+
+.photo-wrapper img {
+    display: block;
+    width: 260px;
+    height: 200px;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+} 
+  
+
+.photo-wrapper2 img {
+    display: block;
+    width: 500px;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+} 
+  
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .right-column {
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
