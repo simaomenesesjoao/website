@@ -1,6 +1,18 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
+import { appConfig } from './app/app.config';
+import { provideMatomo, withRouter } from 'ngx-matomo-client';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+bootstrapApplication(AppComponent, {
+  ...appConfig,
+  providers: [
+    ...(appConfig.providers || []),
+    provideMatomo(
+      {
+        siteId: 1, 
+        trackerUrl: 'http://localhost:8080/', 
+      },
+      withRouter() // tracks route changes automatically
+    ),
+  ],
+}).catch((err) => console.error(err));
