@@ -1,8 +1,5 @@
-// vite.config.ts
-import { defineConfig } from 'vite';
-
-export default defineConfig({
+export default {
   server: {
     allowedHosts: ['simaomenesesjoao.com'],
   },
-});
+};
