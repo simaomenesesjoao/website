@@ -10,9 +10,9 @@ bootstrapApplication(AppComponent, {
     provideMatomo(
       {
         siteId: 1, 
-        trackerUrl: 'http://localhost:8080/', 
+        trackerUrl: 'http://simaomenesesjoao.com:8080/', 
       },
-      withRouter() // tracks route changes automatically
+      withRouter()
     ),
   ],
 }).catch((err) => console.error(err));
