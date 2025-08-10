@@ -23,13 +23,14 @@
     "bootstrap-icons": "^1.13.1",
     "highlight.js": "^11.11.1",
     "katex": "^0.16.22",
+    "ngx-matomo-client": "^6.4.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.19",
-    "@angular/cli": "^18.2.19",
+    "@angular/cli": "^18.2.20",
     "@angular/compiler-cli": "^18.2.0",
     "typescript": "~5.5.2"
   }
