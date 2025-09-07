@@ -12,7 +12,7 @@ WORKDIR /app
 
 RUN git clone https://github.com/simaomenesesjoao/website.git website
 RUN git clone https://github.com/simaomenesesjoao/Ostomachion.git Ostomachion
-RUN cd /app/website && git checkout analytics
+RUN cd /app/website 
 
 RUN cd /app/Ostomachion/documents && npm install marked
 RUN cd /app/Ostomachion/documents && node ./install.js /app/website/angular_app/src/assets/projects/
