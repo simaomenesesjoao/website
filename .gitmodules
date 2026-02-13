@@ -1,0 +1,6 @@
+[submodule "angular_app/external/LinearProgramming"]
+	path = angular_app/external/LinearProgramming
+	url = https://github.com/simaomenesesjoao/Integer-Linear-Programming.git
+[submodule "angular_app/external/Ostomachion"]
+	path = angular_app/external/Ostomachion
+	url = https://github.com/simaomenesesjoao/Ostomachion.git
