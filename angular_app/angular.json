@@ -50,9 +50,19 @@
             "assets": [
               "src/assets",
               {
-                
                 "glob": "**/*",
-                "input": "public"
+                "input": "external/Ostomachion/documents",
+                "output": "assets/Ostomachion"
+              },
+              {
+                "glob": "index.html",
+                "input": "external/LinearProgramming/dist",
+                "output": "assets/LinearProgramming"
+              },
+              {
+                "glob": "main.css",
+                "input": "external/LinearProgramming/dist",
+                "output": "assets/LinearProgramming"
               }
             ],
             "styles": [
@@ -60,7 +70,7 @@
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "src/styles.scss",
               "node_modules/katex/dist/katex.min.css",
-              "node_modules/highlight.js/styles/github.css"
+              "node_modules/highlight.js/styles/hybrid.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"

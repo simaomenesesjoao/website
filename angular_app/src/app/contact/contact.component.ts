@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DynamicNavbarService } from '../dynamic-navbar.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,6 +8,15 @@ import { Component } from '@angular/core';
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
-export class ContactComponent {
+export class ContactComponent implements OnInit {
+
+  constructor(
+    private navbarService: DynamicNavbarService
+  ) {}
+
+  ngOnInit(){
+    this.navbarService.setTitle("Contacts")
+
+  }
 
 }

@@ -8,9 +8,8 @@ import { NavbarComponent } from "./navbar/navbar.component";
   standalone: true,
   imports: [RouterOutlet, NavbarComponent, CommonModule],
   template: `
-<app-navbar></app-navbar>
-
-    <router-outlet />
+    <app-navbar></app-navbar>
+    <router-outlet/>
   `,
   styles: [],
 })

@@ -1,1 +1,17 @@
-<p>prev-next works!</p>
+<div class="article-nav">
+
+  <div class="nav-item" [class.hidden]="!prev.length">
+    <a [routerLink]="prev" class="nav-card prev">
+      <span class="label">Previous</span>
+      <span class="title">{{ prev_title }}</span>
+    </a>
+  </div>
+
+  <div class="nav-item" [class.hidden]="!next.length">
+    <a [routerLink]="next" class="nav-card next">
+      <span class="label">Next</span>
+      <span class="title">{{ next_title }}</span>
+    </a>
+  </div>
+
+</div>

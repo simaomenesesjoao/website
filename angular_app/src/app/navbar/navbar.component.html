@@ -1,149 +1,106 @@
-<nav class="navbar-style navbar fixed-top ">
-    <!------ bg-body-tertiary ---->
-  <div class="container-fluid ">
+<!-- <nav class="overbar">
 
-    <div>
+  <div></div>
 
-        <div [ngClass]="{'myclass': previous() !== null, 'myclass_hide': previous() === null}">
-            <a [routerLink]="['/', previous()?.project, previous()?.chapter, previous()?.page]"> 
-                
-                <i class="bi bi-arrow-left text-white" style="font-size: 2rem;"></i>
-            </a> 
-        </div>
-        
-        <div style="display: inline-block; color:black; font-size:1.5rem"> 
-            <h1>{{ current() }} </h1>
-        </div>
+  <div class="center-group">
 
-        <div [ngClass]="{'myclass': next() !== null, 'myclass_hide': next() === null}">
-            <a [routerLink]="['/', next()?.project, next()?.chapter, next()?.page]" >
-                <i class="bi bi-arrow-right text-white" style="font-size: 2rem;"></i>
-            </a>
-        </div>
+    <a
+      [routerLink]="prev()"
+      class="nav-arrow"
+      [class.hidden]="!prev().length"
+    >
+      ←
+    </a>
+
+    <span class="center-title">
+      <h1>{{ title() }}</h1>
+    </span>
+
+    <a
+      [routerLink]="next()"
+      class="nav-arrow"
+      [class.hidden]="!next().length"
+    >
+      →
+    </a>
+
+  </div>
+
+
+<div class="right-group">
+</div>
+</nav> -->
+
+<div class="menu-btn" (click)="toggleMenu()">☰</div>
+
+<!-- Overlay -->
+<div class="overlay" *ngIf="isOpen" (click)="toggleMenu()"></div>
+
+<!-- Sidebar -->
+<div class="sidebar" [class.open]="isOpen">
+
+  <h2>Navigation</h2>
+
+  <a routerLink="/Home" (click)="onPress()" routerLinkActive="active-link">Home</a>
+  <a routerLink="/About" (click)="onPress()" routerLinkActive="active-link">About</a>
+
+  <!-- ProjectsList Accordion -->
+  <div class="accordion">
+
+    <div class="accordion-header">
+
+        <a class="accordion-link" 
+            routerLink="/Projects"
+            (click)="onPress()" 
+            routerLinkActive="active-link">
+            Projects
+        </a>
+
+        <span class="accordion-arrow"
+            (click)="toggleMain('projects'); $event.stopPropagation()"
+            [class.open]="activeMain === 'projects'">
+            ▶
+        </span>
+
     </div>
-    
-    <button class="navbar-toggler" 
-            type="button" 
-            data-bs-toggle="offcanvas" 
-            data-bs-target="#offcanvasNavbar" 
-            aria-controls="offcanvasNavbar" 
-            aria-label="Toggle navigation">
 
-      <span class="navbar-dark navbar-toggler-icon"></span>
+    <div class="accordion-content" *ngIf="activeMain === 'projects'">
 
-    </button>
+      <!-- Project Sub-Accordion -->
+      <div *ngFor="let project of (projects | keyvalue)">
 
-    <div class="offcanvas offcanvas-end" 
-         tabindex="-1" 
-         id="offcanvasNavbar" 
-         aria-labelledby="offcanvasNavbarLabel">
+        <div class="accordion-header">
 
-      <div class="offcanvas-header">
-        <h2 class="offcanvas-title" id="offcanvasNavbarLabel">Navigation</h2>
-        
-        <button type="button" 
-                class="btn-close" 
-                data-bs-dismiss="offcanvas" 
-                aria-label="Close">
-        </button>
+            <!-- Main clickable title (navigates) -->
+            <a class="accordion-link" 
+                [routerLink]="['/Projects', project.value.url]"
+                (click)="onPress()" 
+                routerLinkActive="active-link">
+                {{ project.key }}
+            </a>
 
-      </div>
+            <!-- Arrow (expands only) -->
+            <span class="accordion-arrow"
+                (click)="toggleProject(project.key); $event.stopPropagation()"
+                [class.open]="activeProject === project.key">
+                ▶
+            </span>
 
-      <div class="offcanvas-body">
-        
-        <div class="accordion" id="accordionPanelsStayOpenExample">
+        </div>
 
-            
-            <div [routerLink]="'/Home'" class="accordion-item" 
-                style="padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x); cursor:pointer">
-                Home
-            </div>
+        <div class="accordion-content nested" *ngIf="activeProject === project.key">
 
-            <div [routerLink]="'/About'" class="accordion-item" 
-                style="padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x); cursor:pointer">
-                About me
-            </div>
-
-            <div class="accordion-item" id="panelsStayOpen-headingOne">
-
-                    <div style="display: flex">
-
-                        <div [routerLink]="['/Projects']" class="custom-split-button-left">
-                            Projects
-                        </div>
-
-                        <button class="accordion-button collapsed custom-split-button-right" 
-                                type="button" 
-                                data-bs-toggle="collapse" 
-                                data-bs-target="#panelsStayOpen-collapseOne" 
-                                aria-expanded="false" 
-                                aria-controls="panelsStayOpen-collapseOne">
-                        </button>
-                    </div>
-
-                <div id="panelsStayOpen-collapseOne" 
-                     class="accordion-collapse collapse" 
-                     aria-labelledby="panelsStayOpen-headingOne">
-
-                    <div class="accordion-body">
-                        <div class="accordion" id="accordionPanelsStayOpenExample1">
-                            <ul>
-                                @for (project of projects(); track project.project; let i = $index) {
-                                    <li class="accordion-item" id="heading-{{ i }}">
-
-                                            <div style="display: flex">
-
-                                                <div class="custom-split-button-left">
-                                                    <a [routerLink]="['/', project.project, project.chapters[0].chapter, project.chapters[0].page]">
-                                                        {{ project.project }}
-                                                    </a>
-                                                </div>
-
-
-                                                <button class="accordion-button collapsed custom-split-button-right" 
-                                                        type="button"
-                                                        data-bs-toggle="collapse"
-                                                        [attr.data-bs-target]="'#collapse-' + i"
-                                                        [attr.aria-controls]="'collapse-' + i"
-                                                        aria-expanded="false">
-                                                </button>
-                                            </div>
-
-                                        <div id="collapse-{{ i }}" 
-                                            class="accordion-collapse collapse" 
-                                            [attr.aria-labelledby]="'heading-' + i">
-
-                                            <div class="accordion-body"> 
-                                                <ul >
-                                                @for (chapter of project.chapters; track chapter) {
-                                                    <li class="accordion-item" 
-                                                        style="padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x); cursor:pointer">
-                                                        <a [routerLink]="['/', project.project, chapter.chapter, chapter.page]">
-                                                            {{ chapter.page }}
-
-                                                        </a>
-                                                    </li>
-                                                }
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                }
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div [routerLink]="'/Contact'" class="accordion-item" 
-                style="padding: var(--bs-accordion-btn-padding-y) var(--bs-accordion-btn-padding-x); cursor:pointer"
-                >
-                Contact me
-            </div>
+            <a *ngFor="let page of project.value.pages"
+                [routerLink]="['/Projects', project.value.url, page.url]"
+                (click)="onPress()" 
+                routerLinkActive="active-link">
+                {{ page.title }}
+            </a>
 
         </div>
       </div>
     </div>
   </div>
-</nav>
+
+  <a routerLink="/Contact" (click)="onPress()">Contact</a>
+</div>
