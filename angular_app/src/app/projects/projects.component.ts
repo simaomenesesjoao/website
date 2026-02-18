@@ -3,7 +3,7 @@ import { Constraint, PivotSnippet} from '@simao/js-widgets';
 import { RouterModule } from '@angular/router';
 import { DynamicNavbarService } from '../dynamic-navbar.service';
 
-export async function initPivot3(id: string) {
+export async function initPivot3(id: string, id2: string) {
     const constraints: Constraint[] = [];
     constraints.push(new Constraint({lower: 0, a:  1.0, b: 0.0, upper: undefined, label: "x"}));
     constraints.push(new Constraint({lower: 0, a:  0.0, b: 1.0, upper: undefined, label: "y"}));
@@ -18,7 +18,7 @@ export async function initPivot3(id: string) {
         constraints: constraints, 
         costFunction: [1.0, 2.0],
         showMatrix: null,
-        showCoords: null,
+        showCoords: document.getElementById(id2)!,
         topRightCoord: {x: 10.0, y: 10.0},
         botLeftCoord: {x: -1.0, y: -1.0}
     });
@@ -42,6 +42,6 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit(){
     this.navbarService.setTitle("Projects");
-    initPivot3('pivot3');
+    initPivot3('pivot3', 'pivot3a');
   }
 }

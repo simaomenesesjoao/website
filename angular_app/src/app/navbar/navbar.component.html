@@ -41,13 +41,26 @@
 
   <h2>Navigation</h2>
 
-  <a routerLink="/Home" (click)="onPress()" routerLinkActive="active-link">Home</a>
-  <a routerLink="/About" (click)="onPress()" routerLinkActive="active-link">About</a>
+  <div class="accordion-header">
+    <span class="accordion-arrow placeholder"></span>
+    <a routerLink="/Home" (click)="onPress()" routerLinkActive="active-link">Home</a>
+  </div>
+
+  <div class="accordion-header">
+    <span class="accordion-arrow placeholder"></span>
+    <a routerLink="/About" (click)="onPress()" routerLinkActive="active-link">About</a>
+  </div>
 
   <!-- ProjectsList Accordion -->
   <div class="accordion">
 
     <div class="accordion-header">
+
+        <span class="accordion-arrow"
+            (click)="toggleMain('projects'); $event.stopPropagation()"
+            [class.open]="activeMain === 'projects'">
+            ▶
+        </span>
 
         <a class="accordion-link" 
             routerLink="/Projects"
@@ -55,12 +68,6 @@
             routerLinkActive="active-link">
             Projects
         </a>
-
-        <span class="accordion-arrow"
-            (click)="toggleMain('projects'); $event.stopPropagation()"
-            [class.open]="activeMain === 'projects'">
-            ▶
-        </span>
 
     </div>
 
@@ -71,6 +78,13 @@
 
         <div class="accordion-header">
 
+            <!-- Arrow (expands only) -->
+            <span class="accordion-arrow"
+                (click)="toggleProject(project.key); $event.stopPropagation()"
+                [class.open]="activeProject === project.key">
+                ▶
+            </span>
+
             <!-- Main clickable title (navigates) -->
             <a class="accordion-link" 
                 [routerLink]="['/Projects', project.value.url]"
@@ -78,13 +92,6 @@
                 routerLinkActive="active-link">
                 {{ project.key }}
             </a>
-
-            <!-- Arrow (expands only) -->
-            <span class="accordion-arrow"
-                (click)="toggleProject(project.key); $event.stopPropagation()"
-                [class.open]="activeProject === project.key">
-                ▶
-            </span>
 
         </div>
 
@@ -102,5 +109,10 @@
     </div>
   </div>
 
-  <a routerLink="/Contact" (click)="onPress()">Contact</a>
+
+  <div class="accordion-header">
+    <span class="accordion-arrow placeholder"></span>
+    <a routerLink="/Contact" (click)="onPress()" routerLinkActive="active-link">Contact</a>
+  </div>
+  
 </div>

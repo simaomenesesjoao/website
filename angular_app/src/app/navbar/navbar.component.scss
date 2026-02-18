@@ -108,7 +108,6 @@
 }
 
 .sidebar a {
-
   font-family: "Inter", sans-serif;
   letter-spacing: 0.3px;
   display: block;
@@ -117,6 +116,12 @@
   text-decoration: none;
   color: #444;
   transition: background 0.2s ease;
+}
+
+.nested a {
+  padding-top: 0.0rem;   /* smaller vertical padding */
+  padding-bottom: 0.0rem;   /* smaller vertical padding */
+  font-size: 0.95rem;       /* optional: slightly smaller text */
 }
 
 .sidebar a:hover {
@@ -137,17 +142,18 @@
 }
 
 .accordion-content {
-  padding-left: 1rem;
+  padding-left: 0.7rem;
 }
 
 .nested {
-  padding-left: 1rem;
+  padding-left: 1.7rem;
 }
 
 .accordion-header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 15px 1fr; /* fixed arrow column */
   align-items: center;
+  gap: 2px;
 }
 
 .accordion-link {
@@ -155,9 +161,13 @@
   color: black;
   flex: 1;
 }
+
 .accordion-arrow {
-  opacity: 0.1;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  width: 15px;
+  text-align: center;
+  cursor: pointer;
+  opacity: 0.4;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .accordion-header:hover .accordion-arrow {
@@ -166,4 +176,8 @@
 
 .accordion-arrow.open {
   transform: rotate(90deg);
+}
+
+.accordion-arrow.placeholder {
+  visibility: hidden;
 }
