@@ -55,12 +55,7 @@
                 "output": "assets/Ostomachion"
               },
               {
-                "glob": "index.html",
-                "input": "external/LinearProgramming/dist",
-                "output": "assets/LinearProgramming"
-              },
-              {
-                "glob": "main.css",
+                "glob": "**/*",
                 "input": "external/LinearProgramming/dist",
                 "output": "assets/LinearProgramming"
               }

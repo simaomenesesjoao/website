@@ -141,11 +141,8 @@ export class OstomachionComponent implements OnInit {
       }
 
       const page_path = `assets/Ostomachion/${mapped}`
-
-      if(page_path){
-        this.loadPage(page_path, title);
-      }
-
+      this.loadPage(page_path, title);
+      
     });
   }
 

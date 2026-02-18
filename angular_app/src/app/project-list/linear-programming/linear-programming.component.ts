@@ -2,9 +2,12 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import hljs from 'highlight.js';
 
+import { ActivatedRoute } from '@angular/router';
 import { DynamicNavbarService } from '../../dynamic-navbar.service';
 import { KatexRendererService } from '../../katex-renderer.service';
-import { init } from '../../../../external/LinearProgramming/dist/main'
+import { ProjectStructureService } from '../../project-structure.service';
+import { init } from '../../../../external/LinearProgramming/dist/documents/main'
+import { PrevNextComponent } from "../../prev-next/prev-next.component";
 
 function numberHeaders(){
   let h2Count = 0;
@@ -27,42 +30,92 @@ function numberHeaders(){
 
 @Component({
   selector: 'app-pivot-latex',
+  standalone: true,
+  imports: [PrevNextComponent],
   templateUrl: 'linear-programming.html',
 })
 export class LinearProgrammingComponent implements OnInit {
-  @ViewChild('htmlContainer', { static: true })
+  @ViewChild('content', { static: true })
   htmlContainer!: ElementRef<HTMLElement>;
 
+  next: string[];
+  prev: string[];
+  next_title: string;
+  prev_title: string;
+
   constructor(
-    private http: HttpClient,
-    private katexRenderer: KatexRendererService,
-    private navbarService: DynamicNavbarService
-  ) {}
+      private route: ActivatedRoute,
+      private projectService: ProjectStructureService,
+      private katexRenderer: KatexRendererService,  
+      private navbarService: DynamicNavbarService,
+      private http: HttpClient) {
+        this.next = [];
+        this.prev = [];
+        this.next_title = '';
+        this.prev_title = '';
+    }
 
   ngOnInit(){
-
+    this.route.paramMap.subscribe(params => {
+      let url = params.get('page');
+      if(!url){
+        url = 'Introduction'
+      }
+      console.log(url);
+      const page = this.projectService.getPage('Linear Programming', url)!;
+      const project = this.projectService.getProject('Linear Programming')!;
+      const mapped = page.path;
+      const title = page.title;
+      const index = page.index;
+      
     this.navbarService.setTitle("Linear Programming");
-    
-    this.http
-      .get('assets/LinearProgramming/index.html', { responseType: 'text' })
-      .subscribe(html => {
-        const el = this.htmlContainer.nativeElement;
 
-        el.innerHTML = html;
-        this.katexRenderer.renderMathInElement(el);
+      if(index > 0){
+        this.prev = ['/Projects/LinearProgramming', project.pages[index-1].url];
+        this.prev_title = project.pages[index-1].title;
+        console.log(this.prev);
+        // this.navbarService.setPrev();
+      } else {
+        this.prev = [];
+      }
+
+      if(index < project.pages.length-1){
         
-        el.querySelectorAll('pre code').forEach(block => {
-            hljs.highlightElement(block as HTMLElement);
-          });
+        this.next = ['/Projects/LinearProgramming', project.pages[index+1].url];
+        this.next_title = project.pages[index+1].title
+        console.log(this.next);
+        // this.navbarService.setNext();
+      } else {
+        this.next = [];
+      }
 
-        init();
-        numberHeaders();
-      });
+      if (!mapped || !title) {
+        console.error('Page not found:', url);
+        return;
+      }
 
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'assets/LinearProgramming/main.css';
-    document.head.appendChild(link);
+      const page_path = `assets/LinearProgramming/${mapped}`
+
+      this.http
+        .get(page_path, { responseType: 'text' })
+        .subscribe(html => {
+          const el = this.htmlContainer.nativeElement;
+
+          el.innerHTML = html;
+          this.katexRenderer.renderMathInElement(el);
+          
+          el.querySelectorAll('pre code').forEach(block => {
+              hljs.highlightElement(block as HTMLElement);
+            });
+
+          init();
+          numberHeaders();
+        });
+
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'assets/LinearProgramming/documents/style.css';
+      document.head.appendChild(link);
+    });    
   }
-
 }
