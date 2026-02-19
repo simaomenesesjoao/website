@@ -109,7 +109,7 @@ export class LinearProgrammingComponent implements OnInit {
             });
 
           init();
-          numberHeaders();
+          // numberHeaders();
         });
 
       const link = document.createElement('link');

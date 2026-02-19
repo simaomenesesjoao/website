@@ -13,6 +13,8 @@ sudo systemctl restart nginx
 # Setting up the Angular app and Matomo
 git clone https://github.com/simaomenesesjoao/website
 cd website
+git submodule update --init --recursive
+
 sudo docker build --no-cache -t angular-website .
 sudo docker run -d -p 4200:80 angular-website
 

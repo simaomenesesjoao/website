@@ -58,31 +58,31 @@ export const LinearProgrammingProject: ProjectConfig = {
   pages: [
     {
       url: 'Introduction',
-      path: 'documents/chapter2.html',
-      title: 'Linear Programming',
+      path: 'documents/chapter1.html',
+      title: 'Introduction',
       index: 0
     },
     {
-      url: 'CoordinateSystems',
-      path: 'documents/chapter3.html',
-      title: 'Coordinate Systems',
+      url: 'Pivoting',
+      path: 'documents/chapter2.html',
+      title: 'Pivoting',
       index: 1
     },
     {
       url: 'PivotingWithMatrices',
-      path: 'documents/chapter4.html',
+      path: 'documents/chapter3.html',
       title: 'Pivoting With Matrices',
       index: 2
     },
     {
       url: 'TheSimplexMethod',
-      path: 'documents/chapter5.html',
+      path: 'documents/chapter4.html',
       title: 'The Simplex Method',
       index: 3
     },
     {
       url: 'Conclusion',
-      path: 'documents/chapter6.html',
+      path: 'documents/chapter5.html',
       title: 'Conclusion',
       index: 4
     }]
